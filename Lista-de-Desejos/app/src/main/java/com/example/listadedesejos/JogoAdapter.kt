@@ -8,12 +8,24 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class JogoAdapter(private val jogoList: List<Jogo>): RecyclerView.Adapter<JogoAdapter.JogoViewHolder>() {
+class JogoAdapter(
+        private val jogoList: List<Jogo>,
+        val listener: OnJogoClickListener
+    ): RecyclerView.Adapter<JogoAdapter.JogoViewHolder>() {
 
-    class JogoViewHolder(jogoView: View): RecyclerView.ViewHolder(jogoView){
+    inner class JogoViewHolder(jogoView: View): RecyclerView.ViewHolder(jogoView), View.OnClickListener {
+
         val image: ImageView = jogoView.findViewById(R.id.imageView)
-         val titulo: TextView = jogoView.findViewById(R.id.title)
-         val info: TextView = jogoView.findViewById(R.id.info)
+        val titulo: TextView = jogoView.findViewById(R.id.title)
+        val info: TextView = jogoView.findViewById(R.id.info)
+
+        init {
+            jogoView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            listener.onJogoClick(adapterPosition)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JogoViewHolder {
@@ -23,7 +35,7 @@ class JogoAdapter(private val jogoList: List<Jogo>): RecyclerView.Adapter<JogoAd
 
     override fun onBindViewHolder(holder: JogoViewHolder, position: Int) {
         val jogoAtual = jogoList[position]
-        holder.image.setImageResource(jogoAtual.imagem)
+        holder.image.setImageResource(jogoAtual.image)
         holder.titulo.text = (jogoAtual.nome)
         holder.info.text = (jogoAtual.desenvolvedora)
 

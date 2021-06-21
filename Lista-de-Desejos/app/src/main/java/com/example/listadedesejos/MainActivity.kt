@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnJogoClickListener {
 
     private val jogos: ArrayList<Jogo> = generateList(500)
-    private val adapter= JogoAdapter(jogos)
+    private val adapter= JogoAdapter(jogos, this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,5 +43,11 @@ class MainActivity : AppCompatActivity() {
         val position = (0..8).random()
         jogos.removeAt(position)
         adapter.notifyItemRemoved(position)
+    }
+
+    override fun onJogoClick(position: Int) {
+        Toast.makeText(this, "Jogo: ${jogos[position].nome}", Toast.LENGTH_SHORT).show()
+        jogos[position].desenvolvedora = "vocẽ clicou neste jogo"
+        adapter.notifyItemChanged(position)
     }
 }
