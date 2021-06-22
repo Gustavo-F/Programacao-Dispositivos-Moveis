@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">Lista de Desejos</string>
-    <string name="insert">Inserir</string>
-    <string name="remove">Remover</string>
+    <string name="app_name">My Games Wishlist</string>
+    <string name="insert">Add Game</string>
+    <string name="remove">Remove</string>
+    <string name="launch_date">Launch Date</string>
+    <string name="developer">Developer</string>
+    <string name="name">Name</string>
+    <string name="price_example">R$ 10,0</string>
 </resources>

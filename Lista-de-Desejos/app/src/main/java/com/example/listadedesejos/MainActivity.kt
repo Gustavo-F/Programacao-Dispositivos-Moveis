@@ -6,12 +6,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.security.spec.PSSParameterSpec
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity(), OnJogoClickListener {
+class MainActivity : AppCompatActivity(), OnGameClickListener {
 
-    private val jogos: ArrayList<Jogo> = generateList(500)
-    private val adapter= JogoAdapter(jogos, this)
+    private val games: ArrayList<Game> = generateList(500)
+    private val adapter= GameAdapter(games, this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,10 +23,10 @@ class MainActivity : AppCompatActivity(), OnJogoClickListener {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
     }
-    fun generateList(size: Int): ArrayList<Jogo>{
-        val list = ArrayList<Jogo>()
+    private fun generateList(size: Int): ArrayList<Game>{
+        val list = ArrayList<Game>()
         for (i in 0 until size){
-            val jogo = Jogo(R.drawable.ic_baseline_adb_24, "Jogo $i", "Desenvolvedora $i")
+            val jogo = Game(R.drawable.ic_baseline_adb_24, "Game $i", 10.0f,null, "Developer $i")
             list.add(jogo)
         }
 
@@ -33,21 +34,14 @@ class MainActivity : AppCompatActivity(), OnJogoClickListener {
     }
 
     fun insertButton(view: View) {
-        val jogo = Jogo(R.drawable.ic_baseline_adb_24, "Novo Jogo", "desenvolvedora")
+        val jogo = Game(R.drawable.ic_baseline_adb_24, "New Game", 10.0f,null, "Developer")
         val position = Random.nextInt(0, 8)
-        jogos.add(position, jogo)
+        games.add(position, jogo)
         adapter.notifyItemInserted(position)
     }
 
-    fun removeButton(view: View) {
-        val position = (0..8).random()
-        jogos.removeAt(position)
+    override fun onRemoveButtonClick(position: Int) {
+        games.removeAt(position)
         adapter.notifyItemRemoved(position)
-    }
-
-    override fun onJogoClick(position: Int) {
-        Toast.makeText(this, "Jogo: ${jogos[position].nome}", Toast.LENGTH_SHORT).show()
-        jogos[position].desenvolvedora = "vocẽ clicou neste jogo"
-        adapter.notifyItemChanged(position)
     }
 }
