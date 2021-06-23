@@ -12,17 +12,18 @@
         android:layout_height="match_parent"
         android:padding="8dp"
         android:layout_marginBottom="73dp"
-        tools:listitem="@layout/item"></androidx.recyclerview.widget.RecyclerView>
+        tools:listitem="@layout/item" />
 
     <Button
         android:id="@+id/insertButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:onClick="insertButton"
+        android:onClick="addGame"
         android:text="@string/insert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></Button>
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="UsingOnClickInXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

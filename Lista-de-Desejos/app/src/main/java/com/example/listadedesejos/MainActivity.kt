@@ -1,5 +1,6 @@
 package com.example.listadedesejos
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -33,11 +34,13 @@ class MainActivity : AppCompatActivity(), OnGameClickListener {
         return list
     }
 
-    fun insertButton(view: View) {
-        val jogo = Game(R.drawable.ic_baseline_adb_24, "New Game", 10.0f,null, "Developer")
-        val position = Random.nextInt(0, 8)
-        games.add(position, jogo)
-        adapter.notifyItemInserted(position)
+    fun addGame(view: View) {
+        val intent = Intent(this, AddGameActivity::class.java)
+        startActivity(intent)
+//        val jogo = Game(R.drawable.ic_baseline_adb_24, "New Game", 10.0f,null, "Developer")
+//        val position = Random.nextInt(0, 8)
+//        games.add(position, jogo)
+//        adapter.notifyItemInserted(position)
     }
 
     override fun onRemoveButtonClick(position: Int) {
