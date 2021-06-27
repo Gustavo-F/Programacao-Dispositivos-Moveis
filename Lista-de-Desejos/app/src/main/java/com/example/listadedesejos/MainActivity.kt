@@ -1,14 +1,15 @@
 package com.example.listadedesejos
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.security.spec.PSSParameterSpec
-import kotlin.random.Random
+import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity(), OnGameClickListener {
 
@@ -27,20 +28,31 @@ class MainActivity : AppCompatActivity(), OnGameClickListener {
     private fun generateList(size: Int): ArrayList<Game>{
         val list = ArrayList<Game>()
         for (i in 0 until size){
-            val jogo = Game(R.drawable.ic_baseline_adb_24, "Game $i", 10.0f,null, "Developer $i")
-            list.add(jogo)
+            val game = Game(R.drawable.ic_baseline_adb_24, "Game $i", 10.0f,null, "Developer $i")
+            list.add(game)
         }
 
         return list
     }
 
+    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result: ActivityResult ->
+                if(result.resultCode == Activity.RESULT_OK){
+                    val intent = result.data
+                    val newGameJSON = intent?.getStringExtra("GAME")
+
+                    val newGame: Game = Gson().fromJson(newGameJSON, Game::class.java)
+                    games.add(0, newGame)
+                    adapter.notifyItemInserted(0)
+                }
+    }
+
     fun addGame(view: View) {
-        val intent = Intent(this, AddGameActivity::class.java)
-        startActivity(intent)
-//        val jogo = Game(R.drawable.ic_baseline_adb_24, "New Game", 10.0f,null, "Developer")
-//        val position = Random.nextInt(0, 8)
-//        games.add(position, jogo)
-//        adapter.notifyItemInserted(position)
+        val intent = Intent(
+            this,
+            AddGameActivity::class.java
+        )
+        startForResult.launch(intent)
     }
 
     override fun onRemoveButtonClick(position: Int) {

@@ -7,4 +7,5 @@
     <string name="name">Name</string>
     <string name="price_example">R$ 10,0</string>
     <string name="price">Price</string>
+    <string name="save">Save</string>
 </resources>

@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AddGameActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Game Activity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/gameNameEditTextView"
         android:layout_width="match_parent"
@@ -27,7 +17,8 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/gameDeveloperEditTextView"
@@ -41,7 +32,8 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameNameEditTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/gameNameEditTextView"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/gameLaunchDateEditTextView"
@@ -55,7 +47,8 @@
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameDeveloperEditTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/gameDeveloperEditTextView"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/gamePriceEditTextView"
@@ -70,6 +63,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.572"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameLaunchDateEditTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/gameLaunchDateEditTextView"
+        android:autofillHints="" />
+
+    <Button
+        android:id="@+id/saveGameButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gamePriceEditTextView"
+        android:onClick="saveGame"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
