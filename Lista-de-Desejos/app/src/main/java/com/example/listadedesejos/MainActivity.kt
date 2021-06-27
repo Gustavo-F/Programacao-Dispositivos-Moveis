@@ -9,21 +9,27 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.listadedesejos.databinding.ActivityMainBinding
 import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity(), OnGameClickListener {
 
-    private val games: ArrayList<Game> = generateList(500)
-    private val adapter= GameAdapter(games, this)
+    private val games: ArrayList<Game> = generateList(0)
+    private val adapter = GameAdapter(games, this)
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+
+        setContentView(view)
+
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.setHasFixedSize(true)
     }
     private fun generateList(size: Int): ArrayList<Game>{
         val list = ArrayList<Game>()
