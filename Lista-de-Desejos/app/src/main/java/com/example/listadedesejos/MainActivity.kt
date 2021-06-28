@@ -2,19 +2,18 @@ package com.example.listadedesejos
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.listadedesejos.databinding.ActivityMainBinding
 import com.google.gson.Gson
 
 class MainActivity : AppCompatActivity(), OnGameClickListener {
 
-    private val games: ArrayList<Game> = generateList(0)
+    private val games: ArrayList<Game> = generateList(5)
     private val adapter = GameAdapter(games, this)
 
     private lateinit var binding: ActivityMainBinding
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity(), OnGameClickListener {
     private fun generateList(size: Int): ArrayList<Game>{
         val list = ArrayList<Game>()
         for (i in 0 until size){
-            val game = Game(R.drawable.ic_baseline_adb_24, "Game $i", 10.0f,null, "Developer $i")
+            val game = Game("Game $i", 10.0f,null, "Developer $i")
             list.add(game)
         }
 
@@ -45,11 +44,17 @@ class MainActivity : AppCompatActivity(), OnGameClickListener {
             result: ActivityResult ->
                 if(result.resultCode == Activity.RESULT_OK){
                     val intent = result.data
-                    val newGameJSON = intent?.getStringExtra("GAME")
+                    val gameJSON = intent?.getStringExtra("GAME")
+                    var game: Game = Gson().fromJson(gameJSON, Game::class.java)
 
-                    val newGame: Game = Gson().fromJson(newGameJSON, Game::class.java)
-                    games.add(0, newGame)
-                    adapter.notifyItemInserted(0)
+                    if(intent?.extras?.containsKey("POSITION") == true){
+                        var position = intent.getStringExtra("POSITION")?.toInt()
+                        games[position!!] = game
+                        adapter.notifyItemChanged(position)
+                    }else{
+                        games.add(0, game)
+                        adapter.notifyItemInserted(0)
+                    }
                 }
     }
 
@@ -64,5 +69,20 @@ class MainActivity : AppCompatActivity(), OnGameClickListener {
     override fun onRemoveButtonClick(position: Int) {
         games.removeAt(position)
         adapter.notifyItemRemoved(position)
+    }
+
+    override fun onGameClick(position: Int) {
+        val intent = Intent (
+            this,
+            AddGameActivity::class.java,
+        )
+
+        var game: Game = games[position]
+        var gameJson = Gson().toJson(game)
+
+        intent.putExtra("POSITION", position.toString())
+        intent.putExtra("GAME", gameJson)
+
+        startForResult.launch(intent)
     }
 }

@@ -2,36 +2,51 @@ package com.example.listadedesejos
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
+import com.example.listadedesejos.databinding.ActivityAddGameBinding
 import com.google.gson.Gson
 
 class AddGameActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAddGameBinding
+
+    private var position: Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_game)
+        binding = ActivityAddGameBinding.inflate(layoutInflater)
+        position = -1
+
+        if (intent.extras?.containsKey("POSITION") == true){
+            position = intent?.getStringExtra("POSITION")!!.toInt()
+            var game: Game = Gson().fromJson(intent?.getStringExtra("GAME"), Game::class.java)
+
+            binding.gameNameEditTextView.setText(game.name)
+            binding.gamePriceEditTextView.setText(game.price.toString())
+            binding.gameDeveloperEditTextView.setText(game.developer)
+            binding.gameLaunchDateEditTextView.setText(game.launchDate.toString())
+        }
+
+        val view = binding.root
+        setContentView(view)
     }
 
     fun saveGame(view: View) {
-        val gameName = findViewById<EditText>(R.id.gameNameEditTextView) as EditText
-        val gameDeveloper = findViewById<EditText>(R.id.gameDeveloperEditTextView) as EditText
-        val gamePrice = findViewById<EditText>(R.id.gamePriceEditTextView) as EditText
-        val gameLaunchDate = findViewById<EditText>(R.id.gameLaunchDateEditTextView) as EditText
-
         val newGame = Game(
-            R.drawable.ic_baseline_adb_24,
-            gameName.text.toString(),
-            gamePrice.text.toString().toFloat(),
+            binding.gameNameEditTextView.text.toString(),
+            binding.gamePriceEditTextView.text.toString().toFloat(),
             null,
-            gameDeveloper.text.toString(),
+            binding.gameDeveloperEditTextView.text.toString(),
         )
 
         val newGameJSON = Gson().toJson(newGame)
-
         val intent = Intent()
         intent.putExtra("GAME", newGameJSON)
+
+        if (position > -1){
+            intent.putExtra("POSITION", position.toString())
+        }
 
         setResult(Activity.RESULT_OK, intent)
         finish()
