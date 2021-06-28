@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listadedesejos.databinding.ActivityAddGameBinding
 import com.google.gson.Gson
+import java.text.SimpleDateFormat
 
 class AddGameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddGameBinding
@@ -33,10 +34,13 @@ class AddGameActivity : AppCompatActivity() {
     }
 
     fun saveGame(view: View) {
+        var dateFormat = SimpleDateFormat("dd/MM/yyyy")
+        var launchDate = dateFormat.parse(binding.gameLaunchDateEditTextView.text.toString())
+
         val newGame = Game(
             binding.gameNameEditTextView.text.toString(),
             binding.gamePriceEditTextView.text.toString().toFloat(),
-            null,
+            launchDate,
             binding.gameDeveloperEditTextView.text.toString(),
         )
 

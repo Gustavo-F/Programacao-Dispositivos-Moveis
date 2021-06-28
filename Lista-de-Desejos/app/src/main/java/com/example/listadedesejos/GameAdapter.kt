@@ -17,6 +17,7 @@ class GameAdapter(
             gameBinding.name.text = game.name
             gameBinding.price.text = game.price.toString()
             gameBinding.developer.text = game.developer
+            gameBinding.launchDate.text = game.launchDate.toString()
             gameBinding.remove.setOnClickListener(this)
         }
 
