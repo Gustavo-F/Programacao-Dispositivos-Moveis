@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listadedesejos.databinding.ActivityAddGameBinding
 import com.google.gson.Gson
@@ -34,6 +35,26 @@ class AddGameActivity : AppCompatActivity() {
     }
 
     fun saveGame(view: View) {
+        if (binding.gameNameEditTextView.text.toString().isBlank()){
+            Toast.makeText(this, "Name is a required field...", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (binding.gameDeveloperEditTextView.text.toString().isBlank()){
+            Toast.makeText(this, "Developer is a required field...", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (binding.gameLaunchDateEditTextView.text.toString().isBlank()){
+            Toast.makeText(this, "Launch date is a required field...", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (binding.gamePriceEditTextView.text.toString().isBlank()){
+            Toast.makeText(this, "Price is a required field...", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         var dateFormat = SimpleDateFormat("dd/MM/yyyy")
         var launchDate = dateFormat.parse(binding.gameLaunchDateEditTextView.text.toString())
 
