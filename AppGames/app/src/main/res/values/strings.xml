@@ -7,6 +7,6 @@
     <string name="register">Register</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
-    <string name="login">Login</string>
     <string name="home_fragment">Home Fragment</string>
+    <string name="login">Login</string>
 </resources>
