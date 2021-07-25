@@ -1,38 +1,51 @@
 package com.gustavo.appgames
 
 import android.os.Bundle
-import android.text.method.PasswordTransformationMethod
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
+import android.view.ViewGroup
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
+import com.gustavo.appgames.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
+
+    private var _binding: FragmentRegisterBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val usernameEditText = getView()?.findViewById<EditText>(R.id.usernameRegisterEditText)
-        val passwordEditText = getView()?.findViewById<EditText>(R.id.passwordRegisterEditText)
-        val confirmPasswordEditText = getView()?.findViewById<EditText>(R.id.confirmPasswordEditText)
-        val registerButton = getView()?.findViewById<Button>(R.id.registerButton)
-        val cancelButton = getView()?.findViewById<Button>(R.id.cancelButton)
+        val usernameEditText = binding.usernameRegisterEditText
+        val passwordEditText = binding.passwordRegisterEditText
+        val confirmPasswordEditText = binding.confirmPasswordEditText
 
-        registerButton?.setOnClickListener{
-            if (!checkUsername(usernameEditText?.text.toString())) {
-
-            } else if (!checkPassword(passwordEditText?.text.toString(), confirmPasswordEditText?.text.toString())) {
-
-            } else {
-                Toast.makeText(this.context, "Return True", Toast.LENGTH_SHORT).show()
+        binding.registerButton.setOnClickListener {
+            if (checkUsername() && checkPassword()) {
+                Toast.makeText(this.context, "User registered success!", Toast.LENGTH_SHORT).show()
             }
         }
 
-        cancelButton?.setOnClickListener{activity?.onBackPressed()}
+        binding.cancelButton.setOnClickListener{activity?.onBackPressed()}
     }
 
-    private fun checkUsername(username: String) : Boolean{
+    private fun checkUsername() : Boolean{
+        var username = binding.usernameRegisterEditText.text.toString()
+
         return when {
             username.isBlank() -> {
                 Toast.makeText(this.context, "Enter the username.", Toast.LENGTH_SHORT).show()
@@ -51,7 +64,10 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     }
 
-    private fun checkPassword(password: String, confirmPassword: String) : Boolean{
+    private fun checkPassword() : Boolean{
+        var password = binding.passwordRegisterEditText.text.toString()
+        var confirmPassword = binding.confirmPasswordEditText.text.toString()
+
        return when {
             password.isBlank() -> {
                 Toast.makeText(this.context, "Enter the password.", Toast.LENGTH_SHORT).show()
