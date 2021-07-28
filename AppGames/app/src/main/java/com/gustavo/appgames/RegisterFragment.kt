@@ -6,6 +6,8 @@ import android.widget.Toast
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import com.gustavo.appgames.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
@@ -30,13 +32,16 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val usernameEditText = binding.usernameRegisterEditText
-        val passwordEditText = binding.passwordRegisterEditText
-        val confirmPasswordEditText = binding.confirmPasswordEditText
-
         binding.registerButton.setOnClickListener {
+            var username = binding.usernameRegisterEditText.text.toString()
+            var password = binding.passwordRegisterEditText.text.toString()
+
             if (checkUsername() && checkPassword()) {
+                var userGson = Gson().toJson(User(username, password))
+
                 Toast.makeText(this.context, "User registered success!", Toast.LENGTH_SHORT).show()
+                var action = RegisterFragmentDirections.actionRegisterFragmentToHomeFragment(userGson)
+                findNavController().navigate(action)
             }
         }
 

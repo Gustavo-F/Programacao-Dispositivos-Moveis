@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.google.gson.Gson
 import com.gustavo.appgames.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -37,8 +39,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         binding.loginButton.setOnClickListener{
+            val username = binding.usernameEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+
+            var userGson = Gson().toJson(User(username, password))
+
             if (checkLoginFields()) {
-                val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment(userGson)
                 findNavController().navigate(action)
             }
         }
