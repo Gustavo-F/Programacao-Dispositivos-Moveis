@@ -10,9 +10,6 @@
         android:name="com.gustavo.appgames.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
-        <argument
-            android:name="user"
-            app:argType="string" />
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment"

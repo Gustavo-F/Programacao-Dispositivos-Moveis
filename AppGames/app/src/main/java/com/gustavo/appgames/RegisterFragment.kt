@@ -37,10 +37,12 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             var password = binding.passwordRegisterEditText.text.toString()
 
             if (checkUsername() && checkPassword()) {
-                var userGson = Gson().toJson(User(username, password))
+                var user: User = User(username, password)
+                Data.users.add(user)
+                Data.loggedUser = user
 
                 Toast.makeText(this.context, "User registered success!", Toast.LENGTH_SHORT).show()
-                var action = RegisterFragmentDirections.actionRegisterFragmentToHomeFragment(userGson)
+                var action = RegisterFragmentDirections.actionRegisterFragmentToHomeFragment()
                 findNavController().navigate(action)
             }
         }

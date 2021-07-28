@@ -18,7 +18,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val args: HomeFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,10 +35,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        var user: User = Gson().fromJson(args.user, User::class.java)
-
-        binding.welcomeTextView.text = "Welcome ${user.username} "
+        binding.welcomeTextView.text = "Welcome ${Data.loggedUser?.username} "
 
         binding.headstailsLinearLayout.setOnClickListener {
             var action = HomeFragmentDirections.actionHomeFragmentToHeadsTailsFragment()

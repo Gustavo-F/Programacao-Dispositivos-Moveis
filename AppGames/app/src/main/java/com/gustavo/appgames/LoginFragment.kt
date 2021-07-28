@@ -42,11 +42,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             val username = binding.usernameEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
 
-            var userGson = Gson().toJson(User(username, password))
-
-            if (checkLoginFields()) {
-                val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment(userGson)
+            if (checkLoginFields() && Data.users.contains(User(username, password))) {
+                val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                 findNavController().navigate(action)
+            } else {
+                Toast.makeText(context, "Username or password is incorrect", Toast.LENGTH_SHORT).show()
             }
         }
     }
