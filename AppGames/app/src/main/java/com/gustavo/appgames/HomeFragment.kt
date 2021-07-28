@@ -40,5 +40,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         var user: User = Gson().fromJson(args.user, User::class.java)
 
         binding.welcomeTextView.text = "Welcome ${user.username} "
+
+        binding.headstailsLinearLayout.setOnClickListener {
+            var action = HomeFragmentDirections.actionHomeFragmentToHeadsTailsFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.rollDiceLinearLayout.setOnClickListener{
+            var action = HomeFragmentDirections.actionHomeFragmentToRollDiceFragment()
+            findNavController().navigate(action)
+        }
     }
 }
