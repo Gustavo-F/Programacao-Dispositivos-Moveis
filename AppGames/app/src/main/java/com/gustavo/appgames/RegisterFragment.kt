@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.gson.Gson
 import com.gustavo.appgames.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
@@ -37,7 +36,12 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             var password = binding.passwordRegisterEditText.text.toString()
 
             if (checkUsername() && checkPassword()) {
-                var user: User = User(username, password)
+                var user: User = User(username, password, ArrayList<WinAndDefeat>())
+
+                for(game in Data.games){
+                    user.winsAndDefeats.add(WinAndDefeat(game))
+                }
+
                 Data.users.add(user)
                 Data.loggedUser = user
 

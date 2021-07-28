@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.google.gson.Gson
 import com.gustavo.appgames.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
@@ -20,7 +18,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,6 +30,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Data.games.add(Game("Heads or Tails"))
+        Data.games.add(Game("Roll Dice"))
 
         binding.registerLoginButton.setOnClickListener{
             val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
@@ -39,10 +39,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         binding.loginButton.setOnClickListener{
-            val username = binding.usernameEditText.text.toString()
-            val password = binding.passwordEditText.text.toString()
-
-            if (checkLoginFields() && Data.users.contains(User(username, password))) {
+            if (checkLoginFields()){
                 val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                 findNavController().navigate(action)
             } else {
@@ -52,8 +49,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun checkLoginFields(): Boolean{
-        var username = binding.usernameEditText.text
-        var password = binding.passwordEditText.text
+        val username = binding.usernameEditText.text.toString()
+        val password = binding.passwordEditText.text.toString()
 
         if (username.isBlank()) {
             Toast.makeText(context, "Enter the username.", Toast.LENGTH_SHORT).show()
@@ -65,6 +62,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             return false
         }
 
-        return true
+        for (user in Data.users){
+            if (user.username == username && user.password == password){
+                Data.loggedUser = user
+                return true
+            }
+        }
+
+        return false
     }
 }

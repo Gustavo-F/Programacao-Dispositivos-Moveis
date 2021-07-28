@@ -10,4 +10,6 @@
     <string name="home_fragment">Home Fragment</string>
     <string name="login">Login</string>
     <string name="heads_or_tails">Heads Or Tails</string>
+    <string name="add_defeat">Add Defeat</string>
+    <string name="add_win">Add Win</string>
 </resources>
