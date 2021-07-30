@@ -12,4 +12,7 @@
     <string name="heads_or_tails">Heads Or Tails</string>
     <string name="add_defeat">Add Defeat</string>
     <string name="add_win">Add Win</string>
+    <string name="select_coin_face">Select coin Face</string>
+    <string name="head">Head</string>
+    <string name="tail">Tail</string>
 </resources>
