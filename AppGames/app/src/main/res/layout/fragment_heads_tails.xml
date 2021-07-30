@@ -19,7 +19,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:orientation="horizontal"
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@+id/headsTailsTextView">
@@ -28,19 +27,17 @@
             android:id="@+id/addWinButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
             android:layout_weight="1"
-            android:text="@string/add_win"
-            tools:ignore="ButtonStyle"
-            tools:layout_marginRight="8dp" />
+            android:text="@string/add_win" />
 
         <Button
             android:id="@+id/addDefeatButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:layout_weight="1"
-            android:text="@string/add_defeat"
-            tools:ignore="ButtonStyle"
-            tools:layout_marginLeft="8dp" />
+            android:text="@string/add_defeat" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
