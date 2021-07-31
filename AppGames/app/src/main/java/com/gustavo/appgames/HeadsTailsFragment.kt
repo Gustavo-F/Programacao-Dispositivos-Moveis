@@ -7,7 +7,6 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.gustavo.appgames.databinding.FragmentHeadsTailsBinding
 
@@ -50,10 +49,6 @@ class HeadsTailsFragment: Fragment(R.layout.fragment_heads_tails) {
         if (binding.coinFaceImageView.visibility == VISIBLE){
             binding.coinFaceImageView.visibility = INVISIBLE
         }
-
-        Toast.makeText(context, "Flipping the coin...   ", Toast.LENGTH_SHORT).show()
-
-        Thread.sleep(2000)
 
         val randValue = (0..1).random()
 

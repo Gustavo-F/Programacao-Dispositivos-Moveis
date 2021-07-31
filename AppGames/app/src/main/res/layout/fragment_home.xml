@@ -97,7 +97,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/winsTextView2"
+                android:id="@+id/rollDiceWins"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -105,7 +105,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/defeatsTextView2"
+                android:id="@+id/rollDiceDefeats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

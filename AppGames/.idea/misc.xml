@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/layout/fragment_heads_tails.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21666666666666667" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.20969202898550723" />
+        <entry key="app/src/main/res/layout/fragment_rolldice.xml" value="0.2" />
       </map>
     </option>
   </component>

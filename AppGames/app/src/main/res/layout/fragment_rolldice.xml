@@ -6,14 +6,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".RollDiceFragment">
 
-    <TextView
-        android:id="@+id/rollDiceTextView"
+    <ImageView
+        android:id="@+id/diceResultImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/selectFaceTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/selectFaceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:text="@string/enter_selected_number_face"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Roll Dice" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/selectFaceEditText"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="1"
+        app:layout_constraintEnd_toEndOf="@+id/selectFaceTextView"
+        app:layout_constraintStart_toStartOf="@+id/selectFaceTextView"
+        app:layout_constraintTop_toBottomOf="@+id/selectFaceTextView"
+        tools:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/rollDiceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/roll_dice"
+        app:layout_constraintEnd_toEndOf="@+id/selectFaceEditText"
+        app:layout_constraintStart_toStartOf="@+id/selectFaceEditText"
+        app:layout_constraintTop_toBottomOf="@+id/selectFaceEditText" />
+
+    <TextView
+        android:id="@+id/resultDiceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

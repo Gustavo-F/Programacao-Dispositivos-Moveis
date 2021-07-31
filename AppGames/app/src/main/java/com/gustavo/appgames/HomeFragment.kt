@@ -40,6 +40,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.winsTextView.text = "Wins: ${Data.loggedUser?.winsAndDefeats!![0].wins}"
         binding.defeatsTextView.text = "Defeats: ${Data.loggedUser?.winsAndDefeats!![0].defeats}"
 
+        binding.rollDiceWins.text = "Wins: ${Data.loggedUser?.winsAndDefeats!![1].wins}"
+        binding.rollDiceDefeats.text = "Defeats: ${Data.loggedUser?.winsAndDefeats!![1].defeats}"
+
         binding.headstailsLinearLayout.setOnClickListener {
             var action = HomeFragmentDirections.actionHomeFragmentToHeadsTailsFragment()
             findNavController().navigate(action)

@@ -15,4 +15,6 @@
     <string name="select_coin_face">Select coin Face</string>
     <string name="head">Head</string>
     <string name="tail">Tail</string>
+    <string name="enter_selected_number_face">Enter selected number face</string>
+    <string name="roll_dice">Roll Dice</string>
 </resources>
