@@ -43,11 +43,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         binding.welcomeTextView.text = "Welcome ${Data.loggedUser?.username}"
+
         binding.winsTextView.text = "Wins: ${Data.loggedUser?.winsAndDefeats!![0].wins}"
         binding.defeatsTextView.text = "Defeats: ${Data.loggedUser?.winsAndDefeats!![0].defeats}"
 
         binding.rollDiceWins.text = "Wins: ${Data.loggedUser?.winsAndDefeats!![1].wins}"
         binding.rollDiceDefeats.text = "Defeats: ${Data.loggedUser?.winsAndDefeats!![1].defeats}"
+
+        binding.evenOrOddWins.text = "Wins: ${Data.loggedUser?.winsAndDefeats!![2].wins}"
+        binding.evenOrOddDefeats.text = "Defeats: ${Data.loggedUser?.winsAndDefeats!![2].defeats}"
 
         binding.headstailsLinearLayout.setOnClickListener {
             var action = HomeFragmentDirections.actionHomeFragmentToHeadsTailsFragment()

@@ -32,6 +32,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
         Data.games.add(Game("Heads or Tails"))
         Data.games.add(Game("Roll Dice"))
+        Data.games.add(Game("Even Or Odd"))
 
         binding.registerLoginButton.setOnClickListener{
             val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
