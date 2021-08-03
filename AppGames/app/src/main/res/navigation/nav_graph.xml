@@ -13,7 +13,7 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/loginFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeFragment_to_headsTailsFragment"
@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_homeFragment_to_rollDiceFragment"
             app:destination="@id/rollDiceFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_evenOddFragment"
+            app:destination="@id/evenOddFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -61,4 +64,9 @@
         android:name="com.gustavo.appgames.RollDiceFragment"
         android:label="fragment_rolldice"
         tools:layout="@layout/fragment_rolldice" />
+    <fragment
+        android:id="@+id/evenOddFragment"
+        android:name="com.gustavo.appgames.EvenOddFragment"
+        android:label="fragment_even_odd"
+        tools:layout="@layout/fragment_even_odd" />
 </navigation>

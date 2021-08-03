@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
@@ -36,6 +37,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            var action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+            findNavController().navigate(action)
+        }
+
         binding.welcomeTextView.text = "Welcome ${Data.loggedUser?.username}"
         binding.winsTextView.text = "Wins: ${Data.loggedUser?.winsAndDefeats!![0].wins}"
         binding.defeatsTextView.text = "Defeats: ${Data.loggedUser?.winsAndDefeats!![0].defeats}"
@@ -50,6 +56,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         binding.rollDiceLinearLayout.setOnClickListener{
             var action = HomeFragmentDirections.actionHomeFragmentToRollDiceFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.evenOrOddLinearLayout.setOnClickListener{
+            var action = HomeFragmentDirections.actionHomeFragmentToEvenOddFragment()
             findNavController().navigate(action)
         }
     }
